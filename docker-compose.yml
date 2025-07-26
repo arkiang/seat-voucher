@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  flight-seat-service:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./backend/data:/app/data
+      - ./backend/app.env:/app/app.env
+    restart: on-failure
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    working_dir: /app
+    command: npm run dev -- --host
+    environment:
+      - VITE_API_URL=http://localhost:8081
