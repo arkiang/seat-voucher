@@ -1,7 +1,7 @@
 
-# Bookcabin Voucher App
+# Seat Voucher App
 
-A fullstack app for generating crew seat vouchers based on flight and aircraft information. A take home project by Book Cabin.
+A fullstack app for generating crew seat vouchers based on flight and aircraft information. A take home project by BookCabin.
 Built with:
 
 - **Frontend**: Vite + React + Material UI (MUI)
