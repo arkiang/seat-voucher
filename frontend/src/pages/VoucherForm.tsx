@@ -87,7 +87,9 @@ const VoucherForm: React.FC = () => {
             onBlur={formik.handleBlur}
             label="Aircraft Type"
           >
-            <MenuItem value=""><em>None</em></MenuItem>
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
             {AIRCRAFT_TYPES.map((type) => (
               <MenuItem key={type} value={type}>
                 {type}
@@ -101,20 +103,16 @@ const VoucherForm: React.FC = () => {
           )}
         </FormControl>
 
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          fullWidth
-          sx={{ mt: 2 }}
-        >
+        <Button variant="contained" color="primary" type="submit" fullWidth sx={{ mt: 2 }}>
           Generate Vouchers
         </Button>
       </form>
 
       {seats && (
         <Box mt={3} textAlign="center">
-          <Typography variant="subtitle1" fontWeight="bold">Assigned Seats:</Typography>
+          <Typography variant="subtitle1" fontWeight="bold">
+            Assigned Seats:
+          </Typography>
           <Typography>{seats.join(", ")}</Typography>
         </Box>
       )}
