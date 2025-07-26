@@ -1,0 +1,17 @@
+{
+  "ATR": {
+    "startRow": 1,
+    "endRow": 18,
+    "seats": ["A", "C", "D", "F"]
+  },
+  "Airbus 320": {
+    "startRow": 1,
+    "endRow": 32,
+    "seats": ["A", "B", "C", "D", "E", "F"]
+  },
+  "Boeing 737 Max": {
+    "startRow": 1,
+    "endRow": 32,
+    "seats": ["A", "B", "C", "D", "E", "F"]
+  }
+}
