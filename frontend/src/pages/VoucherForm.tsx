@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
   FormControl,
-  InputLabel,
+  InputLabel, FormControlLabel, Checkbox, FormGroup,
 } from "@mui/material";
 import { useFormik } from "formik";
 import { getGenerateRequestValidationSchema } from "../utils/validators";
@@ -16,6 +16,7 @@ import { AIRCRAFT_TYPES } from "../constant/aircraft";
 
 const VoucherForm: React.FC = () => {
   const [seats, setSeats] = useState<string[] | null>(null);
+  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
 
   const formik = useFormik({
     initialValues: {
@@ -27,9 +28,33 @@ const VoucherForm: React.FC = () => {
     },
     validationSchema: getGenerateRequestValidationSchema(),
     onSubmit: async (values) => {
-      await handleVoucherSubmit(values, setSeats); // enqueueSnackbar is handled internally
+      // Add selected seats to the request body if any are selected
+      const requestData = {
+        ...values,
+        ...(selectedSeats.length > 0 && { seats: selectedSeats })
+      };
+
+      await handleVoucherSubmit(requestData, setSeats); // enqueueSnackbar is handled internally
+
+      setSelectedSeats([]);
     },
   });
+
+  const handleSeatCheckboxChange = (seat: string, checked: boolean) => {
+    if (checked) {
+      setSelectedSeats(prev => [...prev, seat]);
+    } else {
+      setSelectedSeats(prev => prev.filter(s => s !== seat));
+    }
+  };
+
+  const handleSelectAllSeats = (checked: boolean) => {
+    if (checked && seats) {
+      setSelectedSeats([...seats]);
+    } else {
+      setSelectedSeats([]);
+    }
+  };
 
   return (
     <Box maxWidth={500} mx="auto" mt={5} p={3} boxShadow={3} borderRadius={2} bgcolor="#fff">
@@ -103,8 +128,49 @@ const VoucherForm: React.FC = () => {
           )}
         </FormControl>
 
-        <Button variant="contained" color="primary" type="submit" fullWidth sx={{ mt: 2 }}>
-          Generate Vouchers
+        {seats && seats.length > 0 && (
+            <Box mt={3} mb={2}>
+              <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+                Select seats to regenerate the voucher:
+              </Typography>
+
+              <FormControlLabel
+                  control={
+                    <Checkbox
+                        checked={selectedSeats.length === seats.length}
+                        indeterminate={selectedSeats.length > 0 && selectedSeats.length < seats.length}
+                        onChange={(e) => handleSelectAllSeats(e.target.checked)}
+                    />
+                  }
+                  label="Select All"
+                  sx={{ mb: 1 }}
+              />
+
+              <FormGroup>
+                {seats.map((seat) => (
+                    <FormControlLabel
+                        key={seat}
+                        control={
+                          <Checkbox
+                              checked={selectedSeats.includes(seat)}
+                              onChange={(e) => handleSeatCheckboxChange(seat, e.target.checked)}
+                          />
+                        }
+                        label={seat}
+                    />
+                ))}
+              </FormGroup>
+            </Box>
+        )}
+
+        <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            fullWidth
+            sx={{ mt: 2 }}
+        >
+          {seats ? 'Regenerate Vouchers' : 'Generate Vouchers'}
         </Button>
       </form>
 

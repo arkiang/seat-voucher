@@ -3,20 +3,28 @@ package dto
 import "bookcabin-voucher/internal/model"
 
 type CheckFlightRequest struct {
-	FlightNumber string `json:"flightNumber" binding:"required,flight_number"`
-	Date         string `json:"date" binding:"required,datetime=02-01-06"`
+	FlightNumber string   `json:"flightNumber" binding:"required,flight_number"`
+	Date         string   `json:"date" binding:"required,datetime=02-01-06"`
+	Seats        []string `json:"seats"`
 }
 
 type CheckFlightResponse struct {
 	Exists bool `json:"exists"`
 }
 
+type FlightFilter struct {
+	FlightNumber string   `json:"flightNumber" binding:"required,flight_number"`
+	Date         string   `json:"date" binding:"required,datetime=02-01-06"`
+	Seats        []string `json:"seats"`
+}
+
 type GenerateRequest struct {
-	CrewName     string             `json:"name" binding:"required"`
-	CrewID       string             `json:"id" binding:"required"`
-	FlightNumber string             `json:"flightNumber" binding:"required,flight_number"`
-	Date         string             `json:"date" binding:"required,datetime=02-01-06"` //DD-MM-YY
-	Aircraft     model.AircraftType `json:"aircraft" binding:"required,aircraft_enum"`
+	CrewName      string             `json:"name" binding:"required"`
+	CrewID        string             `json:"id" binding:"required"`
+	FlightNumber  string             `json:"flightNumber" binding:"required,flight_number"`
+	Date          string             `json:"date" binding:"required,datetime=02-01-06"` //DD-MM-YY
+	Aircraft      model.AircraftType `json:"aircraft" binding:"required,aircraft_enum"`
+	SeatsToChange []string           `json:"seats"`
 }
 
 type GenerateResponse struct {

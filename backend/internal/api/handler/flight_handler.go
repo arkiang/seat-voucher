@@ -3,11 +3,11 @@ package handler
 import (
 	"bookcabin-voucher/internal/api/model"
 	"bookcabin-voucher/internal/dto"
+	serviceModel "bookcabin-voucher/internal/model"
 	"bookcabin-voucher/internal/usecase"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"strings"
 )
 
 type FlightHandler struct {
@@ -49,13 +49,18 @@ func (h *FlightHandler) Generate(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, dto.GenerateResponse{
 		Success: true,
-		Seats:   splitSeats(assignment.Seats),
+		Seats:   splitSeats(assignment.SeatAssignments),
 	})
 }
 
-func splitSeats(seats string) []string {
-	if seats == "" {
+func splitSeats(seats []serviceModel.FlightSeatAssignment) []string {
+	if len(seats) == 0 {
 		return []string{}
 	}
-	return strings.Split(seats, ",")
+
+	var result []string
+	for _, p := range seats {
+		result = append(result, p.Seat)
+	}
+	return result
 }

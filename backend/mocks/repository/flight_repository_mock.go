@@ -7,13 +7,15 @@
 //
 
 // Package mocks is a generated GoMock package.
-package repository
+package mocks
 
 import (
+	dto "bookcabin-voucher/internal/dto"
 	model "bookcabin-voucher/internal/model"
 	reflect "reflect"
 
 	gomock "go.uber.org/mock/gomock"
+	gorm "gorm.io/gorm"
 )
 
 // MockFlightRepository is a mock of FlightRepository interface.
@@ -40,6 +42,34 @@ func (m *MockFlightRepository) EXPECT() *MockFlightRepositoryMockRecorder {
 	return m.recorder
 }
 
+// BeginTx mocks base method.
+func (m *MockFlightRepository) BeginTx() *gorm.DB {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "BeginTx")
+	ret0, _ := ret[0].(*gorm.DB)
+	return ret0
+}
+
+// BeginTx indicates an expected call of BeginTx.
+func (mr *MockFlightRepositoryMockRecorder) BeginTx() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BeginTx", reflect.TypeOf((*MockFlightRepository)(nil).BeginTx))
+}
+
+// BulkCreateSeatAssignmentsTx mocks base method.
+func (m *MockFlightRepository) BulkCreateSeatAssignmentsTx(tx *gorm.DB, seats []model.FlightSeatAssignment) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "BulkCreateSeatAssignmentsTx", tx, seats)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// BulkCreateSeatAssignmentsTx indicates an expected call of BulkCreateSeatAssignmentsTx.
+func (mr *MockFlightRepositoryMockRecorder) BulkCreateSeatAssignmentsTx(tx, seats any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BulkCreateSeatAssignmentsTx", reflect.TypeOf((*MockFlightRepository)(nil).BulkCreateSeatAssignmentsTx), tx, seats)
+}
+
 // CountByFlightAndDate mocks base method.
 func (m *MockFlightRepository) CountByFlightAndDate(flightNumber, date string) int64 {
 	m.ctrl.T.Helper()
@@ -54,17 +84,76 @@ func (mr *MockFlightRepositoryMockRecorder) CountByFlightAndDate(flightNumber, d
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountByFlightAndDate", reflect.TypeOf((*MockFlightRepository)(nil).CountByFlightAndDate), flightNumber, date)
 }
 
-// Create mocks base method.
-func (m *MockFlightRepository) Create(assignment *model.FlightAssignment) (*model.FlightAssignment, error) {
+// CountByFlightAndDateTx mocks base method.
+func (m *MockFlightRepository) CountByFlightAndDateTx(tx *gorm.DB, flightNumber, date string) int64 {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Create", assignment)
+	ret := m.ctrl.Call(m, "CountByFlightAndDateTx", tx, flightNumber, date)
+	ret0, _ := ret[0].(int64)
+	return ret0
+}
+
+// CountByFlightAndDateTx indicates an expected call of CountByFlightAndDateTx.
+func (mr *MockFlightRepositoryMockRecorder) CountByFlightAndDateTx(tx, flightNumber, date any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CountByFlightAndDateTx", reflect.TypeOf((*MockFlightRepository)(nil).CountByFlightAndDateTx), tx, flightNumber, date)
+}
+
+// CreateTx mocks base method.
+func (m *MockFlightRepository) CreateTx(tx *gorm.DB, assignment *model.FlightAssignment) (*model.FlightAssignment, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateTx", tx, assignment)
 	ret0, _ := ret[0].(*model.FlightAssignment)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// Create indicates an expected call of Create.
-func (mr *MockFlightRepositoryMockRecorder) Create(assignment any) *gomock.Call {
+// CreateTx indicates an expected call of CreateTx.
+func (mr *MockFlightRepositoryMockRecorder) CreateTx(tx, assignment any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockFlightRepository)(nil).Create), assignment)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTx", reflect.TypeOf((*MockFlightRepository)(nil).CreateTx), tx, assignment)
+}
+
+// DeleteSeatsByFilterTx mocks base method.
+func (m *MockFlightRepository) DeleteSeatsByFilterTx(tx *gorm.DB, filter dto.FlightFilter) (int64, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteSeatsByFilterTx", tx, filter)
+	ret0, _ := ret[0].(int64)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteSeatsByFilterTx indicates an expected call of DeleteSeatsByFilterTx.
+func (mr *MockFlightRepositoryMockRecorder) DeleteSeatsByFilterTx(tx, filter any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSeatsByFilterTx", reflect.TypeOf((*MockFlightRepository)(nil).DeleteSeatsByFilterTx), tx, filter)
+}
+
+// GetByFilter mocks base method.
+func (m *MockFlightRepository) GetByFilter(filter dto.FlightFilter) ([]model.FlightAssignment, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetByFilter", filter)
+	ret0, _ := ret[0].([]model.FlightAssignment)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetByFilter indicates an expected call of GetByFilter.
+func (mr *MockFlightRepositoryMockRecorder) GetByFilter(filter any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByFilter", reflect.TypeOf((*MockFlightRepository)(nil).GetByFilter), filter)
+}
+
+// GetByFilterTx mocks base method.
+func (m *MockFlightRepository) GetByFilterTx(tx *gorm.DB, filter dto.FlightFilter) ([]model.FlightAssignment, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetByFilterTx", tx, filter)
+	ret0, _ := ret[0].([]model.FlightAssignment)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetByFilterTx indicates an expected call of GetByFilterTx.
+func (mr *MockFlightRepositoryMockRecorder) GetByFilterTx(tx, filter any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByFilterTx", reflect.TypeOf((*MockFlightRepository)(nil).GetByFilterTx), tx, filter)
 }

@@ -64,12 +64,12 @@ func TestGenerateFlightHandler_Success(t *testing.T) {
 	}
 
 	assignment := &model.FlightAssignment{
-		CrewName:     "ApArki",
-		CrewID:       "98123",
-		FlightNumber: "JT692",
-		FlightDate:   "26-07-25",
-		AircraftType: "Airbus 320",
-		Seats:        "3A,5C,8F",
+		CrewName:        "ApArki",
+		CrewID:          "98123",
+		FlightNumber:    "JT692",
+		FlightDate:      "26-07-25",
+		AircraftType:    "Airbus 320",
+		SeatAssignments: []model.FlightSeatAssignment{{Seat: "3A"}, {Seat: "5C"}, {Seat: "8F"}},
 	}
 
 	mockUsecase.EXPECT().GenerateAndAssignSeats(reqData).Return(assignment, nil)
