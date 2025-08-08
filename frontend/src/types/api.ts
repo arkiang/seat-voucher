@@ -4,4 +4,5 @@ export interface GenerateRequest {
   flightNumber: string;
   date: string;
   aircraft: string;
+  seats?: string[];
 }

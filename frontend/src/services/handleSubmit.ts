@@ -7,16 +7,18 @@ export const handleVoucherSubmit = async (
   setSeats: React.Dispatch<React.SetStateAction<string[] | null>>
 ): Promise<void> => {
   try {
-    const checkRes = await axios.post("/api/check", {
-      flightNumber: values.flightNumber,
-      date: values.date,
-    });
-
-    if (checkRes.data.exists) {
-      enqueueSnackbar("This flight already has seat assignments.", {
-        variant: "info",
+    if (!values.seats || values.seats.length === 0) {
+      const checkRes = await axios.post("/api/check", {
+        flightNumber: values.flightNumber,
+        date: values.date,
       });
-      return;
+
+      if (checkRes.data.exists) {
+        enqueueSnackbar("This flight already has seat assignments.", {
+          variant: "info",
+        });
+        return;
+      }
     }
 
     const genRes = await axios.post("/api/generate", values);
