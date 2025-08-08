@@ -24,13 +24,16 @@ func NewSeatAllocator(path string) *SeatGenerator {
 	return &SeatGenerator{layouts: layouts}
 }
 
-func (s *SeatGenerator) GenerateSeats(aircraft model.AircraftType, count int) ([]string, error) {
+func (s *SeatGenerator) GenerateSeats(aircraft model.AircraftType, count int, existingSeats []string) ([]string, error) {
 	layout, ok := s.layouts[aircraft]
 	if !ok {
 		return nil, fmt.Errorf("unknown aircraft")
 	}
 	result := make([]string, 0, count)
 	seen := make(map[string]bool)
+	for _, seat := range existingSeats {
+		seen[seat] = true
+	}
 	tries := 0
 	maxTries := 1000
 	for len(result) < count && tries < maxTries {

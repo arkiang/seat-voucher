@@ -17,7 +17,16 @@ type FlightAssignment struct {
 	FlightNumber string       `gorm:"type:varchar(20);not null"`
 	FlightDate   string       `gorm:"type:date;not null"`
 	AircraftType AircraftType `gorm:"type:varchar(50);not null"`
-	Seats        string       `gorm:"type:text;not null"` // comma-separated
 
+	SeatAssignments []FlightSeatAssignment `gorm:"foreignKey:FlightAssignmentID;constraint:OnDelete:CASCADE;"`
+
+	CreatedAt time.Time `gorm:"autoCreateTime"`
+}
+
+type FlightSeatAssignment struct {
+	ID                 uint   `gorm:"primaryKey"`
+	FlightAssignmentID uint   `gorm:"not null;index"` // FK
+	Seat               string `gorm:"type:text;not null"`
+	
 	CreatedAt time.Time `gorm:"autoCreateTime"`
 }
