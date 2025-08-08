@@ -39,10 +39,16 @@ Try generating vouchers by entering:
 - Name
 - ID
 - Flight Number (e.g. `JT692`)
-- Date (`DD-MM-YYYY`)
+- Date (`DD-MM-YY`)
 - Aircraft Type (e.g. `Airbus 320`)
 
 ---
+
+### 3. Relationship
+
+![img_1.png](img_1.png)
+
+[Mermaid Js](https://mermaid.live/edit#pako:eNqlUslugzAQ_RU0ZxKBwxJ87XKpKlXqrUJCLp6A1diOjFGbkvx7DWQRIu2lc7DG783zLJ4OSs0RKKC5F6wyTObKc7bZiqq2BWsaUSmJyjbe4bBY6O7MNMimNPVq1vwq7kamN6GsJ7j38nSFGmuEqrzS4GehmMTbjOAz_JRJtfIdzZXlzOKZ6_2ZjglTGraxhd3vcKqzQmKfz7m8YPYG2e74hDxOup4N5u_We2g2L9eq9zifT__0v4sFHyQayQR3vz7UloOt0Q0dqHM5Mx855KqPG7UPXFhtgG7YtkEfWGv1616VF2CMOm3PBcVB9Twu17BjPuyYetPaxVjT4nAF2sEXUJKSZUDCaB3FQRCTJPJhDzQOl-skiKNslaVxEgfk6MP3oA-WaZak4SpzZ5YQsiI-GN1W9SV9Zfr-xjwGFUdzp1tlgSZhevwBg9LxIw)
 
 ## Author
 

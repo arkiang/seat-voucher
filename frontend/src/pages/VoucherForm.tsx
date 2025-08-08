@@ -91,7 +91,7 @@ const VoucherForm: React.FC = () => {
         />
 
         <TextField
-          label="Flight Date (DD-MM-YYYY)"
+          label="Flight Date (DD-MM-YY)"
           fullWidth
           margin="normal"
           {...formik.getFieldProps("date")}
