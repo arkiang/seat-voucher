@@ -19,7 +19,7 @@ func setupTestLayout(t *testing.T) *SeatGenerator {
 
 func TestGenerateSeats_Success(t *testing.T) {
 	gen := setupTestLayout(t)
-	seats, err := gen.GenerateSeats(model.Airbus320, 3)
+	seats, err := gen.GenerateSeats(model.Airbus320, 3, make([]string, 0))
 
 	assert.NoError(t, err)
 	assert.Len(t, seats, 3)
@@ -27,7 +27,7 @@ func TestGenerateSeats_Success(t *testing.T) {
 
 func TestGenerateSeats_UnknownAircraft(t *testing.T) {
 	gen := setupTestLayout(t)
-	seats, err := gen.GenerateSeats("some-unknown", 3)
+	seats, err := gen.GenerateSeats("some-unknown", 3, make([]string, 0))
 
 	assert.Error(t, err)
 	assert.Nil(t, seats)
@@ -36,7 +36,7 @@ func TestGenerateSeats_UnknownAircraft(t *testing.T) {
 
 func TestGenerateSeats_InsufficientSeats(t *testing.T) {
 	gen := setupTestLayout(t)
-	seats, err := gen.GenerateSeats(model.Airbus320, 50000000)
+	seats, err := gen.GenerateSeats(model.Airbus320, 50000000, make([]string, 0))
 
 	assert.Error(t, err)
 	assert.Nil(t, seats)
